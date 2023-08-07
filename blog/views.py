@@ -17,6 +17,10 @@ posts = [
 ]
 
 
+def post_list(request):
+    return render(request, 'blogs/post_list.html', {})
+
+
 def home(request):
     data = {'posts': posts}
     return render(request, 'blogs/home.html', data)
@@ -24,5 +28,3 @@ def home(request):
 
 def about(request):
     return render(request, 'blogs/about.html', {'title': 'about'})
-
-
