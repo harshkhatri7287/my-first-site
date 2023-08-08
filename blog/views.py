@@ -1,30 +1,17 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-
-posts = [
-    {
-        'title': 'first post',
-        'author': 'Harsh Khatri',
-        'createdOn': '28-01-2002',
-        'content': 'Hello, this is my first post'
-    },
-    {
-        'title': 'second post',
-        'author': 'Manish Khatri',
-        'createdOn': '05-09-2005',
-        'content': 'Hello, this is my........ first post'
-    }
-]
+from .models import Post, Employee
+from django.utils import timezone
 
 
 def post_list(request):
-    return render(request, 'blogs/post_list.html', {})
-
-
-def home(request):
-    data = {'posts': posts}
-    return render(request, 'blogs/home.html', data)
+    Posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blogs/post_list.html', {'Posts': Posts})
 
 
 def about(request):
     return render(request, 'blogs/about.html', {'title': 'about'})
+
+
+def employee_list(request):
+    Employees = Employee.objects.all()
+    return render(request, 'blogs/employee_list.html', {'list_': Employees})

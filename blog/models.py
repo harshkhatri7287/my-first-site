@@ -16,3 +16,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Employee(models.Model):
+    GENDER_CHOICES = [('M', 'male'), ('F', 'female')]
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
+
+    def __str__(self):
+        return str(self.first_name) + ' ' + str(self.last_name)
